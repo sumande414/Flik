@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth/")
-@CrossOrigin(origins = "*")
 public class AuthController {
     private final AuthService authService;
     private final RefreshTokenService refreshTokenService;
@@ -43,9 +42,12 @@ public class AuthController {
 
         String accessToken = jwtService.generateToken(user);
 
-        return ResponseEntity.ok(AuthResponse.builder()
+        return ResponseEntity.ok(AuthResponse
+                .builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken.getRefreshToken())
+                .name(user.getName())
+                .email(user.getEmail())
                 .build());
     }
 }
