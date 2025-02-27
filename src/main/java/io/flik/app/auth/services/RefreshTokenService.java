@@ -27,7 +27,7 @@ public class RefreshTokenService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + username));
 
         RefreshToken refreshToken = user.getRefreshToken();
-        long refreshTokenValidity = 60 * 60 * 24 * 90 * 1000;
+        long refreshTokenValidity = 60L * 60 * 24 * 90 * 1000;
         if (refreshToken == null) {
             refreshToken = RefreshToken.builder()
                     .refreshToken(UUID.randomUUID().toString())
